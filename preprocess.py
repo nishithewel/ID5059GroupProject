@@ -37,8 +37,8 @@ def split_multivalues_columns(data):
     data['screen_width'] = data['id_33'].str.split('x', expand=True)[0]
     data['screen_height'] = data['id_33'].str.split('x', expand=True)[1]
 
-    data['id_34'] = data['id_34'].str.split(':', expand=True)[1]
-    data['id_23'] = data['id_23'].str.split(':', expand=True)[1]
+    # data['id_34'] = data['id_34'].str.split(':', expand=True)[1]
+    # data['id_23'] = data['id_23'].str.split(':', expand=True)[1]
 
     # data.drop(['P_emaildomain', 'R_emaildomain',
     #            'DeviceInfo', 'id_33', 'id_34', 'id_23'])

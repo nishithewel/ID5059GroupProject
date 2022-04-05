@@ -40,8 +40,8 @@ def split_multivalues_columns(data):
     data['id_34'] = data['id_34'].str.split(':', expand=True)[1]
     data['id_23'] = data['id_23'].str.split(':', expand=True)[1]
 
-    data.drop(['P_emaildomain', 'R_emaildomain',
-               'DeviceInfo', 'id_33', 'id_34', 'id_23'])
+    # data.drop(['P_emaildomain', 'R_emaildomain',
+    #            'DeviceInfo', 'id_33', 'id_34', 'id_23'])
 # this should be replace function
     data.loc[data['device_name'].str.contains(
         'SM', na=False), 'device_name'] = 'Samsung'

@@ -43,6 +43,9 @@ def split_multivalues_columns(data):
     # data.drop(['P_emaildomain', 'R_emaildomain',
     #            'DeviceInfo', 'id_33', 'id_34', 'id_23'])
 # this should be replace function
+
+
+# dict(SM='Samsung',SAMSUNG)
     data.loc[data['device_name'].str.contains(
         'SM', na=False), 'device_name'] = 'Samsung'
     data.loc[data['device_name'].str.contains(
@@ -103,8 +106,25 @@ def _aggregation(data):
     return data
 
 
+def convert_to_cats(df):
+    """"GIven athe merged dataframe, this function will
+    conver the datatype of categorical columns to 
+    data of type category"""
+    obj_features = ['id_12', 'id_13', 'id_14', 'id_15', 'id_16', 'id_17', 'id_19', 'id_20',
+                    'id_28', 'id_29',
+                    'id_30', 'id_31', 'id_32', 'id_33', 'id_34', 'id_35', 'id_36', 'id_37', 'id_38',
+                    'DeviceType', 'DeviceInfo', 'ProductCD',
+                    'card1', 'card2', 'card3', 'card4', 'card5', 'card6',
+                    'P_emaildomain', 'R_emaildomain',
+                    'addr1', 'addr2',
+                    'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9']
+    df[obj_features] = df[obj_features].apply(lambda x: x.astype('category'))
+    return df
+
+
 def preprocess(df):
     # === multi values colums related ===
+    df = convert_to_cats(df)
     df = split_multivalues_columns(df)
 
     # === TransactionAmt related ===

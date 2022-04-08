@@ -9,6 +9,8 @@ import gc
 
 from sklearn.preprocessing import OneHotEncoder
 
+import warnings
+warnings.filterwarnings("ignore")
 
 def _get_decimal(data):
     num = 3
@@ -42,8 +44,6 @@ def split_multivalues_columns(data):
     # data['id_34'] = data['id_34'].str.split(':', expand=True)[1]
     # data['id_23'] = data['id_23'].str.split(':', expand=True)[1]
 
-    # data.drop(['P_emaildomain', 'R_emaildomain',
-    #            'DeviceInfo', 'id_33', 'id_34', 'id_23'])
 # this should be replace function
 
 
@@ -120,7 +120,7 @@ def convert_to_cats(df):
                     'P_emaildomain', 'R_emaildomain',
                     'addr1', 'addr2',
                     'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9']
-    df[obj_features] = df[obj_features].apply(lambda x: x.astype('category'))
+    df[obj_features] = df[obj_features].apply(lambda x: x.astype(str))
     return df
 
 
@@ -143,8 +143,17 @@ def get_dummy_vars(test, train, dummy_cols):
     return test, train
 
 
+def process_m(data):
+    """Converts True , False to 1, 0"""
+    m_cols = [col for col in data.columns if col.startswith('M')]
+    return data[m_cols].replace(dict(T=1, F=0))
+
+
 def preprocess(df):
     # === multi values colums related ===
+
+    df = process_m(df)
+
     df = convert_to_cats(df)
     df = split_multivalues_columns(df)
 

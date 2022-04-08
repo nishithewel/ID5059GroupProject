@@ -12,6 +12,7 @@ from sklearn.preprocessing import OneHotEncoder
 import warnings
 warnings.filterwarnings("ignore")
 
+
 def _get_decimal(data):
     num = 3
     data = int(data * 1000)
@@ -120,8 +121,7 @@ def convert_to_cats(df):
                     'P_emaildomain', 'R_emaildomain',
                     'addr1', 'addr2',
                     'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9']
-    types = {feat : 'category' for feat in obj_features}
-    df = df.astype(types)
+    df[obj_features] = df[obj_features].astype('category')
     return df
 
 

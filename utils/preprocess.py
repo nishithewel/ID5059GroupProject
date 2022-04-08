@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import gc
 
+from sklearn.preprocessing import OneHotEncoder
+
 
 def _get_decimal(data):
     num = 3
@@ -120,6 +122,25 @@ def convert_to_cats(df):
                     'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9']
     df[obj_features] = df[obj_features].apply(lambda x: x.astype('category'))
     return df
+
+
+def get_dummy_vars(test, train, dummy_cols):
+
+    for col in dummy_cols:
+        enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
+        dummy_train = enc.fit_transform(train[col].to_numpy().reshape(-1, 1))
+        new_col = [col+'_' + str(i) for i in enc.categories_[0].tolist()]
+
+        # for df in [train, test]:
+        dummy_test = enc.transform(test[col].to_numpy().reshape(-1, 1))
+
+        dummy_dftest = pd.DataFrame(dummy_test, columns=new_col)
+        dummy_dftrain = pd.DataFrame(dummy_train, columns=new_col)
+
+        test = pd.concat([test, dummy_dftest], axis=1)
+        train = pd.concat([train, dummy_dftrain], axis=1)
+
+    return test, train
 
 
 def preprocess(df):

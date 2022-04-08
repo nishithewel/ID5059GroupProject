@@ -120,7 +120,8 @@ def convert_to_cats(df):
                     'P_emaildomain', 'R_emaildomain',
                     'addr1', 'addr2',
                     'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9']
-    df[obj_features] = df[obj_features].apply(lambda x: x.astype(str))
+    types = {feat : 'category' for feat in obj_features}
+    df = df.astype(types)
     return df
 
 

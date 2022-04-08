@@ -147,7 +147,8 @@ def get_dummy_vars(test, train, dummy_cols):
 def process_m(data):
     """Converts True , False to 1, 0"""
     m_cols = [col for col in data.columns if col.startswith('M')]
-    return data[m_cols].replace(dict(T=1, F=0))
+    data[m_cols] = data[m_cols].replace(dict(T=1, F=0))
+    return data
 
 
 def preprocess(df):

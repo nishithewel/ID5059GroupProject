@@ -10,7 +10,7 @@ def stack_models(*models, cv_folds=5, verbose=1):
         models: tuple of (str, estimator).
           Base estimators which will be stacked together. Each element of the
           list is defined as a tuple of string (i.e. name) and an estimator
-          instance. An estimator can be set to ‘drop’ using set_params.
+          instance.
         cv_folds, default=5: number of cv folds.
         verbose, default=1: verbosity level.
 

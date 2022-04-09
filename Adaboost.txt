@@ -1,0 +1,10 @@
+#Import required modules
+from sklearn.ensemble import AdaBoostClassifier
+
+#Build the model
+clf = AdaBoostClassifier(n_estimators=100, random_state=0)
+adaModel = clf.fit(X_train, y_train)
+
+#Adaboost Score
+adaScore = adaModel.score(X_test, y_test)
+print(adaScore)

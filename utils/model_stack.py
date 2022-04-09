@@ -38,6 +38,9 @@ def stack_models(*models, cv_folds=5, verbose=1):
     level1 = LogisticRegression()
     
     # Create the stacking ensemble
-    model = StackingClassifier(estimators=level0, final_estimator=level1,
-                              cv=cv_folds, verbose=verbose)
+    model = StackingClassifier(estimators=level0,
+                               final_estimator=level1,
+                               cv=cv_folds,
+                               verbose=verbose,
+                               n_jobs = -1)
     return model

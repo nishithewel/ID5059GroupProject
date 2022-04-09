@@ -1,10 +1,5 @@
 import pandas as pd
 import numpy as np
-import seaborn as sns
-from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import f1_score
-import matplotlib.pyplot as plt
-from scipy import stats
 import gc
 
 from sklearn.preprocessing import OneHotEncoder
